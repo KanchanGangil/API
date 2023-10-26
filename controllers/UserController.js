@@ -13,7 +13,6 @@ class UserController {
 
     static getalluser = async (req, res) => {
         try {
-            const {id, name, email} = req.data1
             const users = await UserModel.find()
             // console.log(user)
             res.status(201).json({
