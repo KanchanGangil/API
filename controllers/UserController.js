@@ -46,7 +46,7 @@ class UserController {
             // console.log(req.body);
             const { name, email, password, confirmpassword } = req.body
         const image = req.files.image
-        //  console.log(image)
+        // console.log(image)
         const imageupload = await cloudinary.uploader.upload(image.tempFilePath, {
             folder: 'profileimageapi'
         })
@@ -151,10 +151,10 @@ class UserController {
       }
       static updatepassword = async (req, res) => {
         try {
-            const { id } = req.data1
+            // const { id } = req.data1
             const { old_password, new_password, cpassword } = req.body;
             if (old_password && new_password && cpassword) {
-                const user = await UserModel.findById(id);
+                const user = await UserModel.findById(req.params.id);
                 const ismatch = await bcrypt.compare(old_password, user.password);
                 if (!ismatch) {
                     res
@@ -168,7 +168,7 @@ class UserController {
 
                     } else {
                         const newHashpassword = await bcrypt.hash(new_password, 10);
-                        await UserModel.findByIdAndUpdate(id, {
+                        await UserModel.findByIdAndUpdate(req.params.id, {
                             $set: { password: newHashpassword },
                         });
                         res.status(201).json({
@@ -193,10 +193,10 @@ class UserController {
         try {
             // console.log(req.files.avatar)
             // console.log(req.body)
-            const { id } = req.data1
+            // const { id } = req.data1
             if (req.files) {
                 // Update the profile of user
-                const user = await UserModel.findById(id)
+                const user = await UserModel.findById(req.params.id)
                 const image_id = user.image.public_id
                 // console.log(image_id)
                 await cloudinary.uploader.destroy(image_id)
@@ -224,7 +224,7 @@ class UserController {
             }
 
             // Update Code
-            const result = await UserModel.findByIdAndUpdate(id, data)
+            const result = await UserModel.findByIdAndUpdate(req.params.id, data)
 
             res.status(200).json({
                 success: true,
