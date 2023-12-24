@@ -10,7 +10,7 @@ router.get('/getalluser', UserController.getalluser)
 router.get('/me', checkauth, UserController.getuserdetails)
 router.post('/userinsert', UserController.userinsert)
 router.post('/verifylogin', UserController.verifylogin)
-router.get('/logout/:id', UserController.logout)
+router.get('/logout', UserController.logout)
 router.post('/updatepassword/:id', UserController.updatepassword)
 router.post('/updateprofile/:id', UserController.updateprofile)
 
