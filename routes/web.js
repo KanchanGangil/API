@@ -11,8 +11,8 @@ router.get('/me', checkauth, UserController.getuserdetails)
 router.post('/userinsert', UserController.userinsert)
 router.post('/verifylogin', UserController.verifylogin)
 router.get('/logout', UserController.logout)
-router.post('/updatepassword/:id', UserController.updatepassword)
-router.post('/updateprofile/:id', UserController.updateprofile)
+router.post('/updatepassword', checkauth, UserController.updatepassword)
+router.post('/updateprofile', checkauth, UserController.updateprofile)
 
 //CategoryController
 router.post('/categoryinsert', CategoryController.categoryinsert)
