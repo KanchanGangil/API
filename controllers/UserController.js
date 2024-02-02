@@ -25,21 +25,7 @@ class UserController {
             console.log(error);
         }
     }
-    static getuserdetails = async (req, res) => {
-        try {
-            const { id, name, email } = req.data1
-            const user = await UserModel.findById(req.data1.id)
-            // console.log(user)
-            res.status(201).json({
-                status: 'success',
-                message: 'successfull',
-                user,
-            })
-            res.send('hello user')
-        } catch (error) {
-            console.log(error);
-        }
-    }
+
 
     static userinsert = async (req, res) => {
         try {
@@ -149,6 +135,7 @@ class UserController {
             console.log(error)
         }
     }
+    // These three api updateprofile, updatepassword and getuserdetails run after user has logeed in
     static updatepassword = async (req, res) => {
         try {
             // const { id } = req.data1
@@ -233,6 +220,21 @@ class UserController {
             })
         } catch (err) {
             console.log(err)
+        }
+    }
+    static getuserdetails = async (req, res) => {
+        try {
+            const { id, name, email } = req.data1
+            const user = await UserModel.findById(req.data1.id)
+            // console.log(user)
+            res.status(201).json({
+                status: 'success',
+                message: 'successfull',
+                user,
+            })
+            res.send('hello user')
+        } catch (error) {
+            console.log(error);
         }
     }
     // adminapi

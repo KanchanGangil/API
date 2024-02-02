@@ -5,6 +5,7 @@ const checkauth = require('../middleware/auth')
 const CategoryController = require('../controllers/CategoryController')
 const ProductController = require('../controllers/ProductController')
 const PaymentController = require('../controllers/PaymentController')
+const OrderController = require('../controllers/OrderController')
 
 //usercontroller
 router.get('/getalluser', UserController.getalluser)
@@ -31,7 +32,14 @@ router.get('/deleteproduct/:id', ProductController.deleteproduct)
 
 //PaymentController
 router.post('/payment/process', checkauth, PaymentController.processPayment)
-router.get('/stripeapiKey', checkauth, PaymentController.sendStripeApiKey)
+router.get('/stripeapiKey', PaymentController.sendStripeApiKey)
+
+//ordercontroller
+router.post('/order/create', OrderController.createorder)
+router.post('/order/getsingleorder/:id', OrderController.getsingleorder)
+router.get('/order/myorder', OrderController.myorder)
+router.get('/order/getallorders', OrderController.getallorders)
+router.get('/order/deleteorder/:id', OrderController.deleteorder)
 
 
 
