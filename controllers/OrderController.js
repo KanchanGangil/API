@@ -3,6 +3,7 @@ const OrderModel = require("../models/Order");
 class OrderController {
     static createorder = async (req, res) => {
         try {
+            console.log(req.body);
             const { shippingInfo, orderItems, paymentInfo, itemsPrice, taxPrice, shippingPrice, totalPrice } = req.body
             const order = await OrderModel.create({
                 shippingInfo,
@@ -13,7 +14,7 @@ class OrderController {
                 shippingPrice,
                 totalPrice,
                 paidAt: Date.now(),
-                user: req.user._id
+                user: req.data1._id
 
             })
             res
@@ -37,7 +38,7 @@ class OrderController {
     //In myorder user can watch its orders
     static myorder = async (req, res) => {
         try {
-            const order = await OrderModel.find()
+            const data = await OrderModel.find()
             res.status(200)
                 .json({ status: 'success', data });
         } catch (error) {
